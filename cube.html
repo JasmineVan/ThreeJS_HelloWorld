@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="module">
+        import * as THREE from "./three.module.js"
+        // Create scene of the project
+        var scene = new THREE.Scene();
+        // Camera
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var viewAngle = 45;
+        var nearClipping = 0.1;
+        var farClipping = 9999;
+
+        var camera = new THREE.PerspectiveCamera(viewAngle, width/height, nearClipping, farClipping);
+        camera.position.set(0, 0, 10)
+
+        // Box Geometry
+        var cubeGeometry = new THREE.BoxGeometry(2, 2, 2)
+        var cubeMaterial = new THREE.MeshBasicMaterial({color: "red"})
+        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+
+        cube.position.set(0, 0, 0)
+        scene.add(cube)
+    </script>
+</body>
+</html>
