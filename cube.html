@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World</title>
 </head>
+
 <body>
     <div id="container"></div>
     <script type="module">
@@ -19,19 +21,32 @@
         var nearClipping = 0.1;
         var farClipping = 9999;
 
-        var camera = new THREE.PerspectiveCamera(viewAngle, width/height, nearClipping, farClipping);
+        var camera = new THREE.PerspectiveCamera(viewAngle, width / height, nearClipping, farClipping);
         camera.position.set(0, 0, 10)
 
         // Box Geometry
         var cubeGeometry = new THREE.BoxGeometry(2, 2, 2)
-        var cubeMaterial = new THREE.MeshBasicMaterial({color: "yellow"})
+        var cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xd96940 })
         var cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-
-        cube.position.set(0, 0, 0)
+        cube.position.set(-5, 0, 0)
         scene.add(cube)
 
+        // Capsule
+        const capsuleGeometry = new THREE.CapsuleGeometry(1, 1);
+        const capsuleMaterial = new THREE.MeshBasicMaterial({ color: 0xfebfb5 });
+        const capsule = new THREE.Mesh(capsuleGeometry, capsuleMaterial);
+        capsule.position.set(0, 0, 0)
+        scene.add(capsule);
+
+        // Capsule
+        const coneGeometry = new THREE.ConeGeometry(2, 2, 2);
+        const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xaea9ff });
+        const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+        cone.position.set(5, 0, 0)
+        scene.add(cone);
+
         // Renderer part
-        var renderer = new THREE.WebGLRenderer({antialize: true});
+        var renderer = new THREE.WebGLRenderer({ antialize: true });
         renderer.setSize(width, height);
 
         // JS to get element
@@ -39,13 +54,22 @@
         element.appendChild(renderer.domElement);
 
         // Animation
-        function animate(){
+        function animate() {
+            // Rotate cube
             cube.rotation.y += 0.01
             cube.rotation.x += 0.01
+            // Rotate capsule
+            capsule.rotation.y += 0.01
+            capsule.rotation.x += 0.01
+            // Rotate cone
+            cone.rotation.z += 0.01
+            // cone.rotation.x += 0.01
+
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
         }
         animate();
     </script>
 </body>
+
 </html>
