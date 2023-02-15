@@ -24,7 +24,7 @@
 
         // Box Geometry
         var cubeGeometry = new THREE.BoxGeometry(2, 2, 2)
-        var cubeMaterial = new THREE.MeshBasicMaterial({color: "red"})
+        var cubeMaterial = new THREE.MeshBasicMaterial({color: "yellow"})
         var cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
 
         cube.position.set(0, 0, 0)
@@ -45,6 +45,7 @@
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
         }
+        animate();
     </script>
 </body>
 </html>
