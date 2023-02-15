@@ -38,8 +38,8 @@
         capsule.position.set(0, 0, 0)
         scene.add(capsule);
 
-        // Capsule
-        const coneGeometry = new THREE.ConeGeometry(2, 2, 2);
+        // Cone
+        const coneGeometry = new THREE.ConeGeometry(2, 5, 32);
         const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xaea9ff });
         const cone = new THREE.Mesh(coneGeometry, coneMaterial);
         cone.position.set(5, 0, 0)
@@ -62,7 +62,7 @@
             capsule.rotation.y += 0.01
             capsule.rotation.x += 0.01
             // Rotate cone
-            cone.rotation.z += 0.01
+            cone.rotation.y += 0.01
             // cone.rotation.x += 0.01
 
             requestAnimationFrame(animate);
