@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9 Cubes</title>
+    <title>Room</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         // Create scene of the project
         var scene = new THREE.Scene();
         // Background image
-        const bgImageTexture = new THREE.TextureLoader().load("./Images/gradient1.jpg");
+        const bgImageTexture = new THREE.TextureLoader().load("./Images/room_neon.jpg");
         bgImageTexture.wrapS = THREE.RepeatWrapping;
         bgImageTexture.wrapT = THREE.RepeatWrapping;
         // bgImageTexture.repeat.set(4, 4);
@@ -33,40 +33,31 @@
         var farClipping = 9999;
 
         var camera = new THREE.PerspectiveCamera(viewAngle, width / height, nearClipping, farClipping);
-        camera.position.set(0, 0, 10)
+        camera.position.set(0, 3, 16)
 
-        // Cube 1
-        var cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
-        var cubeMaterial1 = new THREE.MeshBasicMaterial({ color: 0xFEFBE9 })
-        var cubeMaterial2 = new THREE.MeshBasicMaterial({ color: 0x6f3be4 })
-        var cubeMaterial3 = new THREE.MeshBasicMaterial({ color: 0xF0A04B })
-        var cubeMaterial4 = new THREE.MeshBasicMaterial({ color: 0x183A1D })
-        var cubeMaterial5 = new THREE.MeshBasicMaterial({ color: 0xD61355 })
-        var cubeMaterial6 = new THREE.MeshBasicMaterial({ color: 0xF94A29 })
-        var cubeMaterial7 = new THREE.MeshBasicMaterial({ color: 0xFCE22A })
-        var cubeMaterial8 = new THREE.MeshBasicMaterial({ color: 0x30E3DF })
-        var cubeMaterial9 = new THREE.MeshBasicMaterial({ color: 0x1F8A70 })
+        // 3 walls
+        var wallGeometry = new THREE.BoxGeometry(5.5, 5.5, 0.5)
+        var wallGeometry2 = new THREE.BoxGeometry(5.5, 5.5, 0.5)
+        var wallMaterial1 = new THREE.MeshBasicMaterial({ color: 0xA7727D })
+        var wallMaterial2 = new THREE.MeshBasicMaterial({ color: 0xF8CBA6 })
+        var wallMaterial3 = new THREE.MeshBasicMaterial({ color: 0xF0997D })
 
-        var cube1 = new THREE.Mesh(cubeGeometry, cubeMaterial1)
-        var cube2 = new THREE.Mesh(cubeGeometry, cubeMaterial2)
-        var cube3 = new THREE.Mesh(cubeGeometry, cubeMaterial3)
-        var cube4 = new THREE.Mesh(cubeGeometry, cubeMaterial4)
-        var cube5 = new THREE.Mesh(cubeGeometry, cubeMaterial5)
-        var cube6 = new THREE.Mesh(cubeGeometry, cubeMaterial6)
-        var cube7 = new THREE.Mesh(cubeGeometry, cubeMaterial7)
-        var cube8 = new THREE.Mesh(cubeGeometry, cubeMaterial8)
-        var cube9 = new THREE.Mesh(cubeGeometry, cubeMaterial9)
+        var wall1 = new THREE.Mesh(wallGeometry, wallMaterial1)
+        var wall2 = new THREE.Mesh(wallGeometry, wallMaterial2)
+        var wall3 = new THREE.Mesh(wallGeometry2, wallMaterial3)
 
-        cube1.position.set(-5, 3, 0)
-        cube2.position.set(0, 3, 0)
-        cube3.position.set(5, 3, 0)
-        cube4.position.set(-5, 0, 0)
-        cube5.position.set(0, 0, 0)
-        cube6.position.set(5, 0, 0)
-        cube7.position.set(-5, -3, 0)
-        cube8.position.set(0, -3, 0)
-        cube9.position.set(5, -3, 0)
-        scene.add(cube1, cube2, cube3, cube4, cube5, cube6, cube7, cube8, cube9)
+        wall1.position.set(-2, 2.5, 0)
+        wall1.rotation.y += Math.PI/4
+
+        wall2.position.set(2, 2.5, 0)
+        wall2.rotation.y += -Math.PI/4
+
+        wall3.position.set(0, 0, 2)
+        wall3.rotation.x += Math.PI/2
+        wall3.rotation.y += Math.PI
+        wall3.rotation.z += Math.PI/4
+    
+        scene.add(wall1, wall2, wall3)
 
         // Renderer part
         var renderer = new THREE.WebGLRenderer({ antialize: true });
@@ -81,18 +72,6 @@
         // Animation
         function animate() {
             // Rotate cube
-            cube1.rotation.x += 0.01
-            cube2.rotation.y += 0.01
-
-            cube3.rotation.z += 0.01
-            cube4.rotation.x += 0.01
-
-            cube5.rotation.y += 0.01
-            cube6.rotation.z += 0.01
-            cube7.rotation.z += 0.01
-
-            cube8.rotation.y += 0.01
-            cube9.rotation.z += 0.01
 
             requestAnimationFrame(animate);
 
