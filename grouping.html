@@ -12,9 +12,7 @@
     <div id="container"></div>
  
     <script type="module">
- 
         import * as THREE from "./three.module.js"
-       
         // Scene
         var scene = new THREE.Scene(); 
        // Linear color
@@ -30,28 +28,32 @@
         var camera = new THREE.PerspectiveCamera(viewAngle, width / height, nearClipping, farClipping);
         camera.position.set(0,5,15)
  
-        // Geometry + Material = Mesh 
-        // // PlaneGeometry >> PLANE 
+        //<< Objects in Scene
+        // Plane
         const geometry = new THREE.PlaneGeometry( 10, 10 );
-        // MeshBasicMaterial >> Material for PLANE 
         const material = new THREE.MeshBasicMaterial( {color: 0x4D455D, side: THREE.DoubleSide} );
-        // Mesh = Geometry + Material 
         const plane = new THREE.Mesh( geometry, material );
-        // Add PLANE Mesh into scene     
-        plane.rotation.set(1.6,0,0)
-        scene.add( plane );
+        plane.rotation.set(1.6,0,0) // set position of the Plane
 
+        // Cube 1
         const cubeGeo = new THREE.BoxGeometry(1,1);
         const cubeMat = new THREE.MeshBasicMaterial({color: 0xFFB84C})
         const cubeMesh = new THREE.Mesh(cubeGeo, cubeMat)
  
-        scene.add(cubeMesh)
- 
+        // Cube 2
         const cubeGeo2 = new THREE.BoxGeometry(1,1);
         const cubeMat2 = new THREE.MeshBasicMaterial({color: 0xF16767})
         const cubeMesh2 = new THREE.Mesh(cubeGeo2, cubeMat2)
         cubeMesh2.position.set(4,0.5,4)
-        scene.add(cubeMesh2)
+
+        // Grouping in 1 Group: Add Mesh to this group: plane, cubeMesh, cubeMesh2
+        const group1 = new THREE.Group();
+        group1.add(plane, cubeMesh, cubeMesh2)
+
+        // Add this group to Scene
+        scene.add(group1)
+
+        //>> End Objects
  
         // Renderer
         var renderer = new THREE.WebGLRenderer({antialias : true});
@@ -64,11 +66,11 @@
  
         function animate() {
             //  Handle
-            // Rotate plane and cube together
+            // Rotate group
+            group1.rotation.x += Math.PI/360;
 
-            // .rotation.y += 0.01
-            // plane.rotation.x += 0.01
-            requestAnimationFrame(animate); // this method calls `animate` frame again & again
+            // repeat every frame
+            requestAnimationFrame(animate);
             renderer.render(scene, camera);
         }
  
